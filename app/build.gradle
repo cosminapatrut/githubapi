@@ -28,9 +28,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // JARs
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     // Android Support Library
     implementation "androidx.appcompat:appcompat:$app_compat_version"
 
@@ -42,9 +39,6 @@ dependencies {
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$support_library_version"
-
-    // CardView
-    implementation "androidx.cardview:cardview:$support_library_version"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"

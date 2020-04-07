@@ -4,18 +4,19 @@ import android.content.Context
 import com.dev.cosmina.githubapi.GitHubApiApp
 import com.dev.cosmina.githubapi.data.remote.api.ApiService
 import com.dev.cosmina.githubapi.data.repository.GitHubRepository
+import com.dev.cosmina.githubapi.utils.network.NetworkHelper
+import com.dev.cosmina.githubapi.utils.rx.RxSchedulerProvider
+import com.dev.cosmina.githubapi.utils.rx.SchedulerProvider
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-/**
- * Module for app level dependencies.
- */
 @Module
-class ApplicationModule(application: GitHubApiApp) {
+class ApplicationModule(private val application: GitHubApiApp) {
 
     private var applicationContext: Context = application.applicationContext
 
@@ -24,6 +25,15 @@ class ApplicationModule(application: GitHubApiApp) {
     fun provideApplicationContext(): Context {
         return applicationContext
     }
+    @Provides
+    fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
+
+    @Provides
+    fun provideSchedulerProvider(): SchedulerProvider = RxSchedulerProvider()
+
+    @Singleton
+    @Provides
+    fun provideNetworkHelper(): NetworkHelper = NetworkHelper(application)
 
     @Provides
     @Singleton

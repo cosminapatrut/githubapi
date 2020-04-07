@@ -1,4 +1,4 @@
-package com.mindorks.bootcamp.instagram.di
+package com.dev.cosmina.githubapi.di
 
 import javax.inject.Scope
 

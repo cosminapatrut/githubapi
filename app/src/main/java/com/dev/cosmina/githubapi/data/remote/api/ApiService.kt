@@ -8,6 +8,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("search/repositories")
-    fun findRepos(@Query("q") query: String): Single<RepoListDTO>
-
+    fun findRepos(@Query("q") query: String = "android",
+                  @Query("sort") sort: String = "stars",
+                  @Query("order") order:String = "desc"): Single<RepoListDTO>
 }

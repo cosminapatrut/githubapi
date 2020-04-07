@@ -10,11 +10,10 @@ import com.dev.cosmina.githubapi.di.module.ApplicationModule
 class GitHubApiApp: Application() {
 
     companion object {
-
         private lateinit var applicationComponent: ApplicationComponent
         private var activityComponent: ActivityComponent? = null
 
-        private fun getApplicationComponent(): ApplicationComponent {
+        fun getApplicationComponent(): ApplicationComponent {
             return applicationComponent
         }
 
@@ -23,14 +22,16 @@ class GitHubApiApp: Application() {
                 activityComponent = it
             }
         }
-
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        applicationComponent = DaggerApplicationComponent.builder()
+        applicationComponent = DaggerApplicationComponent
+            .builder()
             .applicationModule(ApplicationModule(this))
             .build()
+        applicationComponent.inject(this)
     }
 }
+
